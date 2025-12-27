@@ -65,3 +65,8 @@ class GearMaintenanceRequest(models.Model):
                 and rec.scheduled_date < today
                 and rec.state not in ["repaired", "scrap"]
             )
+        
+    def action_mark_scrap(self):
+        for rec in self:
+            rec.state = "scrap"
+            rec.equipment_id.is_scrapped = True

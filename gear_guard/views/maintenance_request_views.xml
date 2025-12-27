@@ -20,6 +20,13 @@
                         <field name="state" />
                         <field name="is_overdue" readonly="1" />
                     </group>
+                    <button
+                        name="action_mark_scrap"
+                        type="object"
+                        string="Mark as Scrap"
+                        class="btn-danger"
+                        attrs="{'invisible': [('state','=','scrap')]}"
+                    />
                 </sheet>
             </form>
         </field>
