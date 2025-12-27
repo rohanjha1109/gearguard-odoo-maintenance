@@ -44,7 +44,53 @@
     <record id="action_gear_maintenance_request" model="ir.actions.act_window">
         <field name="name">Maintenance Requests</field>
         <field name="res_model">gear.maintenance.request</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">kanban,tree,form,calendar</field>
+    </record>
+
+    <!-- Maintenance Request Kanban View -->
+    <record id="view_gear_maintenance_request_kanban" model="ir.ui.view">
+        <field name="name">gear.maintenance.request.kanban</field>
+        <field name="model">gear.maintenance.request</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state">
+                <field name="name" />
+                <field name="equipment_id" />
+                <field name="team_id" />
+                <field name="is_overdue" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card">
+                            <strong>
+                                <field name="name" />
+                            </strong>
+                            <div>
+                                <field name="equipment_id" />
+                            </div>
+                            <div>
+                                <field name="team_id" />
+                            </div>
+                            <div t-if="record.is_overdue.raw_value" style="color:red;">
+                                Overdue
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Preventive Maintenance Calendar View -->
+    <record id="view_gear_maintenance_request_calendar" model="ir.ui.view">
+        <field name="name">gear.maintenance.request.calendar</field>
+        <field name="model">gear.maintenance.request</field>
+        <field name="arch" type="xml">
+            <calendar
+                string="Preventive Maintenance"
+                date_start="scheduled_date"
+                domain="[('request_type','=','preventive')]">
+                <field name="name"/>
+            </calendar>
+        </field>
     </record>
 
 </odoo>
