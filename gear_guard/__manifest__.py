@@ -4,8 +4,10 @@
     "category": "Maintenance",
     "summary": "Odoo maintenance management module for hackathon",
     "depends": ["base"],
-    "data": ["views/equipment_views.xml",
-             "views/maintenance_team_views.xml",
+    "data": [
+        "views/equipment_views.xml",
+        "views/maintenance_team_views.xml",
+        "views/maintenance_request_views.xml",
     ],
     "application": True,
 }
